@@ -261,6 +261,197 @@
     <p>Learn smarter. Grow together.</p>
     <p>© 2026 SOLVIO</p>
   </footer>
+
+<script>
+const notes = [
+  {
+    title: "কোষ ও এর গঠন",
+    subject: "জীববিজ্ঞান",
+    type: "ফ্রি নোট",
+    content: "কোষ জীবদেহের গঠন ও কাজের মৌলিক একক।\n\nকোষের প্রধান অংশ:\n১. কোষঝিল্লি\n২. সাইটোপ্লাজম\n৩. নিউক্লিয়াস\n\nউদ্ভিদকোষের কোষপ্রাচীরে সেলুলোজ থাকে। রাইবোজোমে প্রোটিন সংশ্লেষণ হয়।"
+  },
+  {
+    title: "কোষপ্রাচীর ও কোষঝিল্লি",
+    subject: "জীববিজ্ঞান",
+    type: "ফ্রি নোট",
+    content: "কোষপ্রাচীর উদ্ভিদকোষকে আকৃতি ও দৃঢ়তা দেয়। কোষঝিল্লি নির্বাচনী ভেদ্য এবং পদার্থের আদান-প্রদান নিয়ন্ত্রণ করে।"
+  },
+  {
+    title: "উচ্চতর গণিত অনুশীলন",
+    subject: "উচ্চতর গণিত",
+    type: "পেইড নোট",
+    content: "এই নোটের পেইড সংস্করণ এখনো চালু হয়নি।"
+  }
+];
+
+const notesList = document.getElementById("notesList");
+
+function showNotes(list) {
+  notesList.innerHTML = "";
+
+  if (list.length === 0) {
+    notesList.innerHTML = "<p>কোনো নোট পাওয়া যায়নি।</p>";
+    return;
+  }
+
+  list.forEach((note, index) => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const title = document.createElement("h3");
+    title.textContent = note.title;
+
+    const subject = document.createElement("p");
+    subject.textContent = note.subject + " • " + note.type;
+
+    const button = document.createElement("button");
+    button.className = "btn";
+    button.textContent =
+      note.type === "ফ্রি নোট" ? "নোট পড়ো" : "অর্ডার তথ্য";
+
+    button.addEventListener("click", () => {
+      if (note.type === "পেইড নোট") {
+        alert("পেইড নোট ও পেমেন্ট এখনো চালু হয়নি। এখন টাকা পাঠাবে না।");
+        return;
+      }
+
+      alert(note.title + "\n\n" + note.content);
+    });
+
+    card.append(title, subject, button);
+    notesList.appendChild(card);
+  });
+}
+
+showNotes(notes);
+
+document.getElementById("noteSearch").addEventListener("input", event => {
+  const search = event.target.value.toLowerCase();
+
+  const filtered = notes.filter(note =>
+    (note.title + " " + note.subject)
+      .toLowerCase()
+      .includes(search)
+  );
+
+  showNotes(filtered);
+});
+
+const questions = [
+  {
+    question: "১. প্রোটিন সংশ্লেষণ কোথায় হয়?",
+    options: ["গলজি বস্তু", "রাইবোজোম", "লাইসোজোম", "ভ্যাকুওল"],
+    answer: 1
+  },
+  {
+    question: "২. উদ্ভিদকোষের কোষপ্রাচীরের প্রধান উপাদান কোনটি?",
+    options: ["সেলুলোজ", "গ্লাইকোজেন", "চর্বি", "হিমোগ্লোবিন"],
+    answer: 0
+  },
+  {
+    question: "৩. কোষের নির্বাচনী ভেদ্য আবরণ কোনটি?",
+    options: ["নিউক্লিয়াস", "কোষঝিল্লি", "রাইবোজোম", "ক্রোমোজোম"],
+    answer: 1
+  },
+  {
+    question: "৪. সালোকসংশ্লেষণ কোন অঙ্গাণুতে ঘটে?",
+    options: ["মাইটোকন্ড্রিয়া", "লাইসোজোম", "ক্লোরোপ্লাস্ট", "গলজি বস্তু"],
+    answer: 2
+  },
+  {
+    question: "৫. কোষের বংশগত তথ্যের প্রধান বাহক কোনটি?",
+    options: ["DNA", "পানি", "গ্লুকোজ", "সেলুলোজ"],
+    answer: 0
+  }
+];
+
+const quizArea = document.getElementById("quizArea");
+const quizResult = document.getElementById("quizResult");
+
+function showQuiz() {
+  quizArea.innerHTML = "";
+  quizResult.textContent = "";
+
+  questions.forEach((q, index) => {
+    const box = document.createElement("div");
+    box.className = "question";
+
+    const title = document.createElement("h3");
+    title.textContent = q.question;
+    box.appendChild(title);
+
+    q.options.forEach((option, optionIndex) => {
+      const label = document.createElement("label");
+      label.style.display = "block";
+
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = "question" + index;
+      radio.value = optionIndex;
+      radio.style.width = "auto";
+
+      label.append(radio, document.createTextNode(" " + option));
+      box.appendChild(label);
+    });
+
+    quizArea.appendChild(box);
+  });
+}
+
+document.getElementById("checkAnswers").addEventListener("click", () => {
+  let score = 0;
+
+  questions.forEach((q, index) => {
+    const selected = document.querySelector(
+      'input[name="question' + index + '"]:checked'
+    );
+
+    if (selected && Number(selected.value) === q.answer) {
+      score++;
+    }
+  });
+
+  quizResult.textContent =
+    "তোমার নম্বর: " + score + " / " + questions.length;
+});
+
+document.getElementById("resetQuiz").addEventListener("click", showQuiz);
+
+document.getElementById("saveSuggestion").addEventListener("click", () => {
+  const name = document.getElementById("studentName").value.trim();
+  const suggestion =
+    document.getElementById("studentSuggestion").value.trim();
+
+  const message = document.getElementById("suggestionMessage");
+
+  if (!suggestion) {
+    message.textContent = "আগে তোমার পরামর্শ লিখো।";
+    return;
+  }
+
+  try {
+    const saved = JSON.parse(
+      localStorage.getItem("solvioSuggestions") || "[]"
+    );
+
+    saved.push({
+      name: name || "নাম দেওয়া হয়নি",
+      suggestion: suggestion
+    });
+
+    localStorage.setItem("solvioSuggestions", JSON.stringify(saved));
+
+    message.textContent =
+      "এই ডিভাইসে পরামর্শ সংরক্ষণ হয়েছে। এটি ওয়েবসাইটের মালিকের কাছে পাঠানো হয়নি।";
+
+    document.getElementById("studentSuggestion").value = "";
+  } catch (error) {
+    message.textContent = "পরামর্শ সংরক্ষণ করা যায়নি।";
+  }
+});
+
+showQuiz();
+</script>
 </body>
 </html>
 
