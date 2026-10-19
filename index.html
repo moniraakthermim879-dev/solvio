@@ -45,9 +45,15 @@
 <div id="menu" style="display:none; margin-top:20px;">
   <h2>তোমার শেখা শুরু হোক!</h2>
 
-  <button onclick="alert('পড়াশোনার বিভাগ শীঘ্রই আসছে!')">
-    📚 পড়াশোনা
-  </button>
+  <button onclick="document.getElementById('study').style.display='block'">
+  📚 পড়াশোনা
+</button>
+
+<div id="study" style="display:none;">
+  <h2>📚 পড়াশোনা</h2>
+  <p>স্বাগতম SOLVIO-তে!</p>
+  <p>তোমার পড়াশোনার বিভাগ তৈরি হচ্ছে।</p>
+</div>
 
   <button onclick="alert('MCQ ও কুইজ শীঘ্রই আসছে!')">
     📝 MCQ ও কুইজ
