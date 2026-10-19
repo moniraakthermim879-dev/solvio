@@ -38,7 +38,21 @@
     <p>কঠিন পড়াশোনা হোক সহজ!</p>
     <h2>তোমার পড়াশোনা শুরু করো</h2>
     <p>নোট পড়ো, MCQ অনুশীলন করো এবং পরীক্ষার প্রস্তুতি নাও।</p>
-    <button onclick="alert('স্বাগতম SOLVIO-তে!')">শুরু করো</button>
+    <button onclick="document.getElementById('menu').style.display='block'">
+  শুরু করো
+</button>
+
+<div id="menu" style="display:none; margin-top:20px;">
+  <h2>তোমার শেখা শুরু হোক!</h2>
+
+  <button onclick="alert('পড়াশোনার বিভাগ শীঘ্রই আসছে!')">
+    📚 পড়াশোনা
+  </button>
+
+  <button onclick="alert('MCQ ও কুইজ শীঘ্রই আসছে!')">
+    📝 MCQ ও কুইজ
+  </button>
+</div>
   </div>
 </body>
     </html>
