@@ -65,5 +65,39 @@
   <p>এখানে তুমি MCQ অনুশীলন করতে পারবে।</p>
 </div>
 </div>
+
+<section id="real-quiz">
+  <h2>📝 SOLVIO MCQ কুইজ</h2>
+  <p id="question">বাংলাদেশের রাজধানী কোনটি?</p>
+
+  <button onclick="checkAnswer(this, 'wrong')">চট্টগ্রাম</button>
+  <button onclick="checkAnswer(this, 'correct')">ঢাকা</button>
+  <button onclick="checkAnswer(this, 'wrong')">রাজশাহী</button>
+
+  <p id="feedback"></p>
+  <p id="score">নম্বর: ০</p>
+</section>
+
+<script>
+let answered = false;
+let points = 0;
+
+function checkAnswer(button, answer) {
+  if (answered) return;
+  answered = true;
+
+  if (answer === 'correct') {
+    document.getElementById('feedback').textContent =
+      '✅ সঠিক উত্তর!';
+    points++;
+  } else {
+    document.getElementById('feedback').textContent =
+      '❌ ভুল উত্তর! সঠিক উত্তর ঢাকা।';
+  }
+
+  document.getElementById('score').textContent =
+    'নম্বর: ' + points;
+}
+</script>
 </body>
     </html>
