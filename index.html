@@ -492,6 +492,23 @@ document.getElementById("saveSuggestion").addEventListener("click", () => {
   }
 });
 
+
+document.getElementById("searchQuestions").addEventListener("click", () => {
+  const subject = document.getElementById("findSubject").value;
+  const chapter = document.getElementById("findChapter").value.trim();
+  const type = document.getElementById("findType").value;
+  const year = document.getElementById("findYear").value;
+
+  let query = subject + " " + type + " question";
+  if (chapter) query += " " + chapter;
+  if (year) query += " " + year;
+  else query += " 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026";
+
+  window.open(
+    "https://www.google.com/search?q=" + encodeURIComponent(query),
+    "_blank"
+  );
+});
 showQuiz();
 </script>
 </body>
