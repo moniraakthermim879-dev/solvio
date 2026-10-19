@@ -219,7 +219,49 @@
       <div class="grid" id="notesList"></div>
     </section>
 
-    <section id="quiz">
+    
+<section id="questionFinder">
+  <h2>🔎 Free Question Finder</h2>
+  <p>বিষয় ও প্রশ্নের ধরন বেছে অনলাইনে প্রশ্ন খুঁজে নাও।</p>
+
+  <label for="findSubject">বিষয়</label>
+  <select id="findSubject">
+    <option value="HSC Biology">জীববিজ্ঞান</option>
+    <option value="HSC Chemistry">রসায়ন</option>
+    <option value="HSC Physics">পদার্থবিজ্ঞান</option>
+    <option value="HSC Higher Mathematics">উচ্চতর গণিত</option>
+    <option value="HSC English">ইংরেজি</option>
+    <option value="HSC ICT">ICT</option>
+  </select>
+
+  <label for="findChapter">অধ্যায়ের নাম বা নম্বর</label>
+  <input id="findChapter" type="text"
+    placeholder="যেমন: Chapter 1 / কোষ ও এর গঠন">
+
+  <label for="findType">প্রশ্নের ধরন</label>
+  <select id="findType">
+    <option value="MCQ">MCQ</option>
+    <option value="CQ">CQ (সৃজনশীল প্রশ্ন)</option>
+    <option value="short questions">SQ (সংক্ষিপ্ত প্রশ্ন)</option>
+    <option value="board exam questions">বোর্ড প্রশ্ন</option>
+    <option value="answers and explanations">উত্তর ও ব্যাখ্যা</option>
+  </select>
+
+  <label for="findYear">পরীক্ষার সাল (ঐচ্ছিক)</label>
+  <select id="findYear">
+    <option value="">সব সাল</option>
+    <option value="2026">২০২৬</option>
+    <option value="2025">২০২৫</option>
+    <option value="2024">২০২৪</option>
+    <option value="2023">২০২৩</option>
+    <option value="2022">২০২২</option>
+  </select>
+
+  <button class="btn" id="searchQuestions">
+    অনলাইনে প্রশ্ন খুঁজুন
+  </button>
+</section>
+<section id="quiz">
       <h2>🎯 MCQ ও কুইজ</h2>
       <p>নিজের জ্ঞান যাচাই করো।</p>
       <div id="quizArea"></div>
