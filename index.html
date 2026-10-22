@@ -1,289 +1,258 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SOLVIO | Learn Smarter</title>
+<meta name="theme-color" content="#4f46e5">
+<title>Learnova | Learn Smarter</title>
 <style>
+:root{--primary:#5145cd;--deep:#21185f;--ink:#182033;--muted:#64748b;--bg:#f5f7ff;--card:#fff;--line:#e2e8f0;--green:#dcfce7;--red:#fee2e2}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#172033;line-height:1.65}
-header{background:white;padding:15px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid #ddd}
-.logo{font-size:27px;font-weight:bold;color:#5b4bdb}
-nav a{display:inline-block;margin:4px;color:#333;text-decoration:none;font-weight:bold}
-main{width:92%;max-width:950px;margin:auto}
-.hero{margin-top:24px;padding:28px 22px;border-radius:18px;background:linear-gradient(135deg,#21185f,#7165ee);color:white}
-.hero h1{font-size:30px}
-section{margin-top:30px;scroll-margin-top:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-.card,.question,.result{background:white;padding:16px;border-radius:12px;border:1px solid #e0e3eb;margin:10px 0}
-.btn{padding:10px 15px;border:0;border-radius:8px;background:#5b4bdb;color:white;font-weight:bold;cursor:pointer;margin:5px 3px}
-.hero .btn{background:white;color:#4032b5}
-input,select,textarea{width:100%;padding:11px;margin:7px 0;border:1px solid #ccc;border-radius:8px;font:inherit}
-.option{display:block;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:8px;cursor:pointer}
-.option input{width:auto;margin-right:8px}
-.correct{background:#dcfce7!important;color:#166534!important;border:1px solid #16a34a!important}
-.wrong{background:#fee2e2!important;color:#991b1b!important;border:1px solid #dc2626!important}
-.feedback{padding:10px;border-radius:8px;font-weight:bold}
-.muted{color:#64748b;font-size:14px}
-footer{margin-top:40px;padding:25px;background:#21185f;color:white;text-align:center}
-button:disabled{opacity:.45;cursor:not-allowed}
+html{scroll-behavior:smooth;scroll-padding-top:15px}
+body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:12px 4%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-size:25px;font-weight:800;color:var(--primary);letter-spacing:.2px}
+nav{display:flex;flex-wrap:wrap;gap:5px}
+nav a{padding:6px 9px;text-decoration:none;color:#334155;font-size:14px;font-weight:bold;border-radius:7px}
+nav a:hover{background:#eef2ff;color:var(--primary)}
+main{width:min(100% - 28px,1000px);margin:auto}
+.hero{margin:22px 0;padding:clamp(22px,5vw,42px);border-radius:20px;background:linear-gradient(135deg,#21185f,#7165ee);color:white}
+.hero h1{font-size:clamp(27px,5vw,40px);line-height:1.2;margin:8px 0}
+.hero p{max-width:680px}
+.eyebrow{font-weight:bold;letter-spacing:1px;opacity:.85}
+section{margin:28px 0;scroll-margin-top:90px}
+h2{font-size:clamp(22px,4vw,28px);margin:0 0 12px}
+h3{margin:5px 0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px}
+.card,.panel,.question,.result{background:var(--card);padding:16px;border-radius:14px;border:1px solid var(--line);box-shadow:0 3px 12px #1e293b08}
+.card p{margin:5px 0 12px}
+.btn{display:inline-block;padding:10px 14px;border:0;border-radius:9px;background:var(--primary);color:white;text-decoration:none;font:inherit;font-weight:bold;cursor:pointer;margin:4px 3px 4px 0}
+.btn.secondary{background:#e9eafe;color:#352aa0}
+.btn.light{background:white;color:#352aa0}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+input,select,textarea{width:100%;padding:11px 12px;margin:6px 0 12px;border:1px solid #cbd5e1;border-radius:9px;background:white;color:var(--ink);font:inherit}
+label.field{font-weight:bold;display:block;margin-top:6px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}
+.pill{display:inline-block;background:#eef2ff;color:#3730a3;padding:4px 9px;border-radius:99px;font-size:12px;font-weight:bold}
+.muted{color:var(--muted);font-size:14px}
+.option{display:flex;align-items:flex-start;gap:9px;padding:11px;margin:8px 0;border:1px solid var(--line);border-radius:9px;cursor:pointer;background:white}
+.option input{width:auto;margin:5px 0 0;flex-shrink:0}
+.correct{background:var(--green)!important;color:#166534!important;border:1px solid #16a34a!important}
+.wrong{background:var(--red)!important;color:#991b1b!important;border:1px solid #dc2626!important}
+.feedback{padding:11px;border-radius:9px;margin-top:12px;font-weight:bold}
+.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:#f1f5ff;padding:12px;border-radius:10px;text-align:center}
+.stat strong{display:block;font-size:22px;color:var(--primary)}
+.progress{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden}
+.progress div{height:100%;width:0;background:var(--primary);transition:width .2s}
+footer{margin-top:45px;padding:25px 15px;background:var(--deep);color:white;text-align:center}
+.smallnote{font-size:13px;color:var(--muted)}
+[hidden]{display:none!important}
+@media(max-width:600px){header{position:static}nav a{font-size:13px;padding:5px}main{width:calc(100% - 22px)}.hero{margin-top:14px}.statgrid{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:1/-1}}
 </style>
 </head>
 <body>
 <header>
-  <div class="logo">SOLVIO.</div>
-  <nav>
-    <a href="#home">হোম</a>
-    <a href="#subjects">বিষয়</a>
-    <a href="#notes">নোট</a>
-    <a href="#finder">প্রশ্ন</a>
-    <a href="#quiz">কুইজ</a>
-    <a href="#suggestion">মতামত</a>
+  <div class="logo">Learnova<span aria-hidden="true">.</span></div>
+  <nav aria-label="প্রধান মেনু">
+    <a href="#home">হোম</a><a href="#study">পড়াশোনা</a><a href="#notes">নোট</a>
+    <a href="#finder">প্রশ্নব্যাংক</a><a href="#quiz">কুইজ</a><a href="#progress">অগ্রগতি</a>
   </nav>
 </header>
-
 <main>
 <section class="hero" id="home">
+  <div class="eyebrow">LEARN SMARTER • GROW TOGETHER</div>
   <h1>পড়াশোনা হোক আরও সহজ!</h1>
-  <p>SOLVIO — নোট পড়ো, প্রশ্ন অনুশীলন করো, নিজের ফলাফল যাচাই করো।</p>
-  <a class="btn" href="#notes">নোট দেখো</a>
-  <a class="btn" href="#finder">প্রশ্ন খোঁজো</a>
+  <p>SSC ও HSC-এর বিষয়ভিত্তিক নোট, প্রশ্ন অনুশীলন এবং নিজের শেখার অগ্রগতি এক জায়গায়।</p>
+  <a class="btn light" href="#study">পড়াশোনা শুরু করো</a>
+  <a class="btn" href="#quiz">কুইজ দাও</a>
+  <p class="smallnote" style="color:#e0e7ff">প্রাথমিক সংস্করণ • ফ্রি • মোবাইল-উপযোগী</p>
 </section>
 
-<section id="subjects">
-  <h2>📚 Study Zone</h2>
-  <div class="grid">
-    <div class="card"><h3>🧬 জীববিজ্ঞান</h3><p>নোট ও MCQ অনুশীলন</p><a class="btn" href="#finder">শুরু করো</a></div>
-    <div class="card"><h3>🧪 রসায়ন</h3><p>প্রশ্নব্যাংক তৈরি হচ্ছে</p><a class="btn" href="#finder">প্রশ্ন দেখো</a></div>
-    <div class="card"><h3>⚛️ পদার্থবিজ্ঞান</h3><p>প্রশ্নব্যাংক তৈরি হচ্ছে</p><a class="btn" href="#finder">প্রশ্ন দেখো</a></div>
-    <div class="card"><h3>📐 উচ্চতর গণিত</h3><p>সূত্র ও অনুশীলন</p><a class="btn" href="#finder">প্রশ্ন দেখো</a></div>
-    <div class="card"><h3>📖 ইংরেজি</h3><p>Grammar ও Vocabulary</p><a class="btn" href="#finder">প্রশ্ন দেখো</a></div>
+<section id="study">
+  <h2>📚 তোমার পড়াশোনা সেট করো</h2>
+  <div class="panel">
+    <div class="row">
+      <div><label class="field" for="level">শ্রেণি</label><select id="level"><option value="SSC">SSC</option><option value="HSC" selected>HSC</option></select></div>
+      <div><label class="field" for="group">বিভাগ</label><select id="group"><option value="Science">Science — বিজ্ঞান</option><option value="Arts">Arts/Humanities — মানবিক</option><option value="Commerce">Commerce/Business Studies — ব্যবসায় শিক্ষা</option></select></div>
+      <div><label class="field" for="language">ভাষা</label><select id="language"><option value="bn">বাংলা</option><option value="en">English</option></select></div>
+    </div>
+    <p class="muted">এগুলো বেছে নিলে বিষয় তালিকা বদলাবে। নির্বাচন এই ডিভাইসে সংরক্ষিত থাকবে।</p>
   </div>
+  <div class="grid" id="subjectCards" style="margin-top:14px"></div>
 </section>
 
 <section id="notes">
   <h2>📝 Notes Library</h2>
-  <input id="noteSearch" placeholder="নোট খুঁজুন...">
+  <input id="noteSearch" placeholder="নোটের নাম বা বিষয় খুঁজুন..." aria-label="নোট খুঁজুন">
   <div class="grid" id="notesList"></div>
+  <div id="noteReader" class="result" hidden></div>
 </section>
 
 <section id="finder">
-  <h2>🔎 SOLVIO Question Bank</h2>
-  <p>প্রশ্ন এখানে অ্যাপের ভেতরেই দেখা যাবে।</p>
-  <label for="subject">বিষয়</label>
-  <select id="subject">
-    <option value="জীববিজ্ঞান">জীববিজ্ঞান</option>
-    <option value="রসায়ন">রসায়ন</option>
-    <option value="পদার্থবিজ্ঞান">পদার্থবিজ্ঞান</option>
-    <option value="উচ্চতর গণিত">উচ্চতর গণিত</option>
-    <option value="ইংরেজি">ইংরেজি</option>
-    <option value="ICT">ICT</option>
-  </select>
-  <label for="chapter">অধ্যায়</label>
-  <input id="chapter" placeholder="যেমন: কোষ ও এর গঠন">
-  <label for="type">প্রশ্নের ধরন</label>
-  <select id="type">
-    <option value="MCQ">MCQ</option>
-    <option value="SQ">SQ — সংক্ষিপ্ত প্রশ্ন</option>
-    <option value="CQ">CQ — সৃজনশীল প্রশ্ন</option>
-  </select>
-  <label for="year">বোর্ড পরীক্ষার সাল</label>
-  <select id="year">
-    <option value="">অনুশীলনী প্রশ্ন</option>
-    <option value="2026">২০২৬</option>
-    <option value="2025">২০২৫</option>
-    <option value="2024">২০২৪</option>
-    <option value="2023">২০২৩</option>
-    <option value="2022">২০২২</option>
-  </select>
-  <button class="btn" id="findBtn">SOLVIO-তে প্রশ্ন দেখাও</button>
+  <h2>🔎 প্রশ্নব্যাংক</h2>
+  <div class="panel">
+    <div class="row">
+      <div><label class="field" for="finderSubject">বিষয়</label><select id="finderSubject"></select></div>
+      <div><label class="field" for="chapter">অধ্যায় (ঐচ্ছিক)</label><input id="chapter" placeholder="যেমন: কোষ ও এর গঠন"></div>
+      <div><label class="field" for="type">প্রশ্নের ধরন</label><select id="type"><option value="MCQ">MCQ</option><option value="SQ">SQ — সংক্ষিপ্ত প্রশ্ন</option><option value="CQ">CQ — সৃজনশীল প্রশ্ন</option></select></div>
+      <div><label class="field" for="year">বোর্ড পরীক্ষার সাল</label><select id="year"><option value="">অনুশীলনী প্রশ্ন</option><option>2026</option><option>2025</option><option>2024</option><option>2023</option><option>2022</option></select></div>
+    </div>
+    <button class="btn" id="findBtn">প্রশ্ন দেখাও</button>
+    <p class="muted">নোট: বর্তমানে নমুনা অনুশীলনী প্রশ্ন আছে। এগুলোকে যাচাইকৃত বোর্ড প্রশ্ন বলা হচ্ছে না।</p>
+  </div>
   <div id="searchResults" aria-live="polite"></div>
 </section>
 
 <section id="quiz">
   <h2>🎯 MCQ ও কুইজ</h2>
-  <p id="quizTitle">কোষ ও এর গঠন — অনুশীলনী MCQ</p>
-  <div id="quizArea"></div>
-  <button class="btn" id="checkBtn">উত্তর যাচাই</button>
-  <button class="btn" id="prevBtn">আগের প্রশ্ন</button>
-  <button class="btn" id="nextBtn">পরের প্রশ্ন</button>
-  <button class="btn" id="resetBtn">আবার চেষ্টা</button>
-  <h3 id="score" aria-live="polite"></h3>
+  <div class="panel">
+    <p id="quizTitle">কোষ ও এর গঠন — অনুশীলনী MCQ</p>
+    <div class="progress" aria-label="কুইজের অগ্রগতি"><div id="quizProgress"></div></div>
+    <div id="quizArea"></div>
+    <div>
+      <button class="btn" id="checkBtn">উত্তর যাচাই</button>
+      <button class="btn secondary" id="prevBtn">আগের প্রশ্ন</button>
+      <button class="btn secondary" id="nextBtn">পরের প্রশ্ন</button>
+      <button class="btn secondary" id="resetBtn">আবার চেষ্টা</button>
+    </div>
+    <h3 id="score" aria-live="polite"></h3>
+  </div>
+</section>
+
+<section id="progress">
+  <h2>📈 আমার অগ্রগতি</h2>
+  <div class="panel">
+    <div class="statgrid">
+      <div class="stat"><strong id="statAnswered">0</strong><span>উত্তর যাচাই</span></div>
+      <div class="stat"><strong id="statCorrect">0</strong><span>সঠিক উত্তর</span></div>
+      <div class="stat"><strong id="statBest">0%</strong><span>সেরা সঠিক হার</span></div>
+    </div>
+    <p class="muted">এই তথ্য শুধু এই ব্রাউজারের local storage-এ থাকে। অন্য ডিভাইসে নিজে থেকে সিঙ্ক হয় না।</p>
+    <button class="btn secondary" id="clearProgress">অগ্রগতি মুছুন</button>
+  </div>
 </section>
 
 <section id="suggestion">
   <h2>💡 Suggestion Box</h2>
-  <input id="studentName" placeholder="তোমার নাম (ঐচ্ছিক)">
-  <textarea id="studentSuggestion" placeholder="তোমার পরামর্শ লেখো..."></textarea>
-  <button class="btn" id="saveSuggestion">পরামর্শ সংরক্ষণ</button>
-  <p id="suggestionMessage"></p>
-  <p class="muted">পরামর্শ এই ডিভাইসেই থাকবে; ওয়েবসাইটের মালিকের কাছে পাঠানো হবে না।</p>
+  <div class="panel">
+    <label class="field" for="studentName">তোমার নাম (ঐচ্ছিক)</label><input id="studentName" placeholder="নাম">
+    <label class="field" for="studentSuggestion">তোমার পরামর্শ</label><textarea id="studentSuggestion" rows="4" placeholder="Learnova-তে কী যোগ করতে চাও?"></textarea>
+    <button class="btn" id="saveSuggestion">এই ডিভাইসে সংরক্ষণ</button>
+    <p id="suggestionMessage" aria-live="polite"></p>
+    <p class="muted">পরামর্শ শুধু এই ডিভাইসে থাকবে; ওয়েবসাইটের মালিকের কাছে পাঠানো হবে না।</p>
+  </div>
 </section>
 </main>
-
-<footer><h2>SOLVIO.</h2><p>Learn smarter. Grow together.</p><p>© 2026 SOLVIO</p></footer>
+<footer><h2>Learnova.</h2><p>Learn smarter. Grow together.</p><p>© 2026 Learnova • Free study tools</p></footer>
 
 <script>
+"use strict";
+const subjectMap={
+ SSC:{
+  Science:["বাংলা","English","গণিত","পদার্থবিজ্ঞান","রসায়ন","জীববিজ্ঞান","উচ্চতর গণিত","বাংলাদেশ ও বিশ্বপরিচয়","ধর্ম ও নৈতিক শিক্ষা","ICT"],
+  Arts:["বাংলা","English","গণিত","বাংলাদেশ ও বিশ্বপরিচয়","ভূগোল ও পরিবেশ","ইতিহাস","পৌরনীতি ও নাগরিকতা","অর্থনীতি","ধর্ম ও নৈতিক শিক্ষা","ICT"],
+  Commerce:["বাংলা","English","গণিত","হিসাববিজ্ঞান","ফিন্যান্স ও ব্যাংকিং","ব্যবসায় উদ্যোগ","বাংলাদেশ ও বিশ্বপরিচয়","ধর্ম ও নৈতিক শিক্ষা","ICT"]
+ },
+ HSC:{
+  Science:["বাংলা","English","ICT","পদার্থবিজ্ঞান","রসায়ন","জীববিজ্ঞান","উচ্চতর গণিত"],
+  Arts:["বাংলা","English","ICT","পৌরনীতি ও সুশাসন","অর্থনীতি","ইতিহাস","ইসলামের ইতিহাস ও সংস্কৃতি","সমাজবিজ্ঞান","যুক্তিবিদ্যা","ভূগোল"],
+  Commerce:["বাংলা","English","ICT","হিসাববিজ্ঞান","ব্যবসায় সংগঠন ও ব্যবস্থাপনা","ফিন্যান্স, ব্যাংকিং ও বিমা","উৎপাদন ব্যবস্থাপনা ও বিপণন","অর্থনীতি"]
+ }
+};
 const notes=[
- {title:"কোষ ও এর গঠন",subject:"জীববিজ্ঞান",type:"ফ্রি নোট",content:"কোষ জীবদেহের গঠন ও কাজের মৌলিক একক। কোষের প্রধান অংশ হলো কোষঝিল্লি, সাইটোপ্লাজম ও নিউক্লিয়াস। রাইবোজোমে প্রোটিন সংশ্লেষণ হয়। উদ্ভিদকোষের কোষপ্রাচীরের প্রধান উপাদান সেলুলোজ।"},
- {title:"কোষপ্রাচীর ও কোষঝিল্লি",subject:"জীববিজ্ঞান",type:"ফ্রি নোট",content:"কোষপ্রাচীর উদ্ভিদকোষকে আকৃতি ও দৃঢ়তা দেয়। কোষঝিল্লি পদার্থের প্রবেশ ও বের হওয়া নিয়ন্ত্রণ করে।"},
- {title:"উচ্চতর গণিত অনুশীলন",subject:"উচ্চতর গণিত",type:"পেইড নোট",content:"পেইড নোট ও পেমেন্ট এখনো চালু হয়নি। এখন টাকা পাঠাবে না।"}
+ {title:"কোষ ও এর গঠন",subject:"জীববিজ্ঞান",level:"HSC",group:"Science",type:"ফ্রি নোট",content:"কোষ জীবদেহের গঠন ও কাজের মৌলিক একক। কোষের প্রধান অংশ হলো কোষঝিল্লি, সাইটোপ্লাজম ও নিউক্লিয়াস। রাইবোজোমে প্রোটিন সংশ্লেষণ হয়। উদ্ভিদকোষের কোষপ্রাচীরের প্রধান উপাদান সেলুলোজ।"},
+ {title:"কোষপ্রাচীর ও কোষঝিল্লি",subject:"জীববিজ্ঞান",level:"HSC",group:"Science",type:"ফ্রি নোট",content:"কোষপ্রাচীর উদ্ভিদকোষকে আকৃতি, দৃঢ়তা ও সুরক্ষা দেয়। কোষঝিল্লি নির্বাচনী ভেদ্য; এটি পদার্থের প্রবেশ ও বের হওয়া নিয়ন্ত্রণ করে।"},
+ {title:"রাইবোজোম ও গলজি বস্তু",subject:"জীববিজ্ঞান",level:"HSC",group:"Science",type:"ফ্রি নোট",content:"রাইবোজোম প্রোটিন সংশ্লেষণের স্থান। গলজি বস্তু প্রোটিন ও লিপিড পরিবর্তন, প্যাকেজিং এবং পরিবহনে সাহায্য করে।"},
+ {title:"কোষীয় অঙ্গাণু — দ্রুত রিভিশন",subject:"জীববিজ্ঞান",level:"HSC",group:"Science",type:"ফ্রি নোট",content:"মাইটোকন্ড্রিয়া ATP উৎপাদনে গুরুত্বপূর্ণ। ক্লোরোপ্লাস্টে সালোকসংশ্লেষণ ঘটে। নিউক্লিয়াসে ইউক্যারিওটিক কোষের অধিকাংশ DNA থাকে।"},
+ {title:"English Grammar: Tense",subject:"English",level:"SSC",group:"Science",type:"ফ্রি নোট",content:"Present Simple: Subject + base verb (he/she/it হলে সাধারণত verb+s/es)। Past Simple: Subject + past form. Future Simple: Subject + will + base verb. প্রশ্ন ও নাকারে auxiliary verb-এর নিয়ম মনে রাখবে।"},
+ {title:"গণিত: সমীকরণ অনুশীলন",subject:"গণিত",level:"SSC",group:"Science",type:"ফ্রি নোট",content:"সমীকরণ সমাধানে উভয় পাশে একই গাণিতিক ক্রিয়া করতে হবে। যেমন 2x + 4 = 10 হলে 2x = 6, তাই x = 3।"},
+ {title:"হিসাববিজ্ঞান: মৌলিক ধারণা",subject:"হিসাববিজ্ঞান",level:"HSC",group:"Commerce",type:"ফ্রি নোট",content:"হিসাববিজ্ঞানে লেনদেন শনাক্ত, পরিমাপ, লিপিবদ্ধ ও প্রতিবেদন করা হয়। প্রতিটি লেনদেনে হিসাবের দুই পাশে প্রভাব পড়ে—এটি দ্বৈত সত্তা ধারণার ভিত্তি।"},
+ {title:"অর্থনীতি: চাহিদা",subject:"অর্থনীতি",level:"HSC",group:"Arts",type:"ফ্রি নোট",content:"অন্যান্য বিষয় অপরিবর্তিত থাকলে পণ্যের দাম বাড়লে সাধারণত চাহিদার পরিমাণ কমে এবং দাম কমলে চাহিদার পরিমাণ বাড়ে। একে চাহিদার বিধি বলা হয়।"},
+ {title:"পেইড নোটের অবস্থা",subject:"সাধারণ",level:"SSC",group:"Science",type:"তথ্য",content:"পেইড নোট ও পেমেন্ট এখনো চালু হয়নি। এখন কোনো টাকা পাঠাবে না।"}
 ];
-
 const questions=[
- {question:"১. প্রোটিন সংশ্লেষণ কোথায় হয়?",options:["গলজি বস্তু","রাইবোজোম","লাইসোজোম","ভ্যাকুওল"],answer:1,explanation:"রাইবোজোমে প্রোটিন সংশ্লেষণ হয়।"},
- {question:"২. উদ্ভিদকোষের কোষপ্রাচীরের প্রধান উপাদান কোনটি?",options:["সেলুলোজ","গ্লাইকোজেন","চর্বি","হিমোগ্লোবিন"],answer:0,explanation:"উদ্ভিদকোষের কোষপ্রাচীরের প্রধান উপাদান সেলুলোজ।"},
- {question:"৩. কোষের নির্বাচনী ভেদ্য আবরণ কোনটি?",options:["নিউক্লিয়াস","কোষঝিল্লি","রাইবোজোম","ক্রোমোজোম"],answer:1,explanation:"কোষঝিল্লি পদার্থের প্রবেশ ও বের হওয়া নিয়ন্ত্রণ করে।"},
- {question:"৪. সালোকসংশ্লেষণ কোন অঙ্গাণুতে ঘটে?",options:["মাইটোকন্ড্রিয়া","লাইসোজোম","ক্লোরোপ্লাস্ট","গলজি বস্তু"],answer:2,explanation:"ক্লোরোপ্লাস্টে ক্লোরোফিল থাকে এবং সালোকসংশ্লেষণ ঘটে।"},
- {question:"৫. কোষের বংশগত তথ্যের প্রধান বাহক কোনটি?",options:["DNA","পানি","গ্লুকোজ","সেলুলোজ"],answer:0,explanation:"DNA-তে বংশগত তথ্য সংরক্ষিত থাকে।"},
- {question:"৬. কোষের শক্তি উৎপাদনে কোন অঙ্গাণু গুরুত্বপূর্ণ?",options:["রাইবোজোম","মাইটোকন্ড্রিয়া","গলজি বস্তু","নিউক্লিওলাস"],answer:1,explanation:"মাইটোকন্ড্রিয়া কোষীয় শ্বসনের মাধ্যমে ATP উৎপাদনে গুরুত্বপূর্ণ ভূমিকা রাখে।"},
- {question:"৭. প্রোটিন প্যাকেজিং ও পরিবহনে কোন অঙ্গাণু সাহায্য করে?",options:["গলজি বস্তু","কোষপ্রাচীর","ক্লোরোফিল","সেন্ট্রিওল"],answer:0,explanation:"গলজি বস্তু প্রোটিন পরিবর্তন, প্যাকেজিং ও পরিবহনে সাহায্য করে।"},
- {question:"৮. ইউক্যারিওটিক কোষের অধিকাংশ DNA কোথায় থাকে?",options:["কোষপ্রাচীর","নিউক্লিয়াস","গলজি বস্তু","লাইসোজোম"],answer:1,explanation:"ইউক্যারিওটিক কোষের অধিকাংশ DNA নিউক্লিয়াসে থাকে।"},
- {question:"৯. কোষের প্রোটিন তৈরির প্রধান স্থান কোনটি?",options:["রাইবোজোম","ভ্যাকুওল","লাইসোজোম","কোষপ্রাচীর"],answer:0,explanation:"রাইবোজোম প্রোটিন সংশ্লেষণ করে।"},
- {question:"১০. উদ্ভিদকোষে ক্লোরোফিল সাধারণত কোথায় থাকে?",options:["লাইসোজোম","ক্লোরোপ্লাস্ট","গলজি বস্তু","নিউক্লিওলাস"],answer:1,explanation:"ক্লোরোপ্লাস্টের থাইলাকয়েড ঝিল্লিতে ক্লোরোফিল থাকে।"}
+ {question:"প্রোটিন সংশ্লেষণ কোথায় হয়?",options:["গলজি বস্তু","রাইবোজোম","লাইসোজোম","ভ্যাকুওল"],answer:1,explanation:"রাইবোজোমে প্রোটিন সংশ্লেষণ হয়।",subject:"জীববিজ্ঞান",level:"HSC",group:"Science",chapter:"কোষ ও এর গঠন"},
+ {question:"উদ্ভিদকোষের কোষপ্রাচীরের প্রধান উপাদান কোনটি?",options:["সেলুলোজ","গ্লাইকোজেন","চর্বি","হিমোগ্লোবিন"],answer:0,explanation:"উদ্ভিদকোষের কোষপ্রাচীরের প্রধান উপাদান সেলুলোজ।",subject:"জীববিজ্ঞান",level:"HSC",group:"Science",chapter:"কোষ ও এর গঠন"},
+ {question:"কোষের নির্বাচনী ভেদ্য আবরণ কোনটি?",options:["নিউক্লিয়াস","কোষঝিল্লি","রাইবোজোম","ক্রোমোজোম"],answer:1,explanation:"কোষঝিল্লি পদার্থের প্রবেশ ও বের হওয়া নিয়ন্ত্রণ করে।",subject:"জীববিজ্ঞান",level:"HSC",group:"Science",chapter:"কোষ ও এর গঠন"},
+ {question:"সালোকসংশ্লেষণ কোন অঙ্গাণুতে ঘটে?",options:["মাইটোকন্ড্রিয়া","লাইসোজোম","ক্লোরোপ্লাস্ট","গলজি বস্তু"],answer:2,explanation:"ক্লোরোপ্লাস্টে ক্লোরোফিল থাকে এবং সালোকসংশ্লেষণ ঘটে।",subject:"জীববিজ্ঞান",level:"HSC",group:"Science",chapter:"কোষ ও এর গঠন"},
+ {question:"কোষের বংশগত তথ্যের প্রধান বাহক কোনটি?",options:["DNA","পানি","গ্লুকোজ","সেলুলোজ"],answer:0,explanation:"DNA-তে বংশগত তথ্য সংরক্ষিত থাকে।",subject:"জীববিজ্ঞান",level:"HSC",group:"Science",chapter:"কোষ ও এর গঠন"},
+ {question:"কোষের শক্তি উৎপাদনে কোন অঙ্গাণু গুরুত্বপূর্ণ?",options:["রাইবোজোম","মাইটোকন্ড্রিয়া","গলজি বস্তু","নিউক্লিওলাস"],answer:1,explanation:"মাইটোকন্ড্রিয়া কোষীয় শ্বসনের মাধ্যমে ATP উৎপাদনে গুরুত্বপূর্ণ ভূমিকা রাখে।",subject:"জীববিজ্ঞান",level:"HSC",group:"Science",chapter:"কোষ ও এর গঠন"},
+ {question:"প্রোটিন প্যাকেজিং ও পরিবহনে কোন অঙ্গাণু সাহায্য করে?",options:["গলজি বস্তু","কোষপ্রাচীর","ক্লোরোফিল","সেন্ট্রিওল"],answer:0,explanation:"গলজি বস্তু প্রোটিন পরিবর্তন, প্যাকেজিং ও পরিবহনে সাহায্য করে।",subject:"জীববিজ্ঞান",level:"HSC",group:"Science",chapter:"কোষ ও এর গঠন"},
+ {question:"ইউক্যারিওটিক কোষের অধিকাংশ DNA কোথায় থাকে?",options:["কোষপ্রাচীর","নিউক্লিয়াস","গলজি বস্তু","লাইসোজোম"],answer:1,explanation:"ইউক্যারিওটিক কোষের অধিকাংশ DNA নিউক্লিয়াসে থাকে।",subject:"জীববিজ্ঞান",level:"HSC",group:"Science",chapter:"কোষ ও এর গঠন"},
+ {question:"কোষের প্রোটিন তৈরির প্রধান স্থান কোনটি?",options:["রাইবোজোম","ভ্যাকুওল","লাইসোজোম","কোষপ্রাচীর"],answer:0,explanation:"রাইবোজোম প্রোটিন সংশ্লেষণ করে।",subject:"জীববিজ্ঞান",level:"HSC",group:"Science",chapter:"কোষ ও এর গঠন"},
+ {question:"উদ্ভিদকোষে ক্লোরোফিল সাধারণত কোথায় থাকে?",options:["লাইসোজোম","ক্লোরোপ্লাস্ট","গলজি বস্তু","নিউক্লিওলাস"],answer:1,explanation:"ক্লোরোপ্লাস্টের থাইলাকয়েড ঝিল্লিতে ক্লোরোফিল থাকে।",subject:"জীববিজ্ঞান",level:"HSC",group:"Science",chapter:"কোষ ও এর গঠন"},
+ {question:"2x + 4 = 10 হলে x কত?",options:["2","3","4","7"],answer:1,explanation:"2x=6, তাই x=3।",subject:"গণিত",level:"SSC",group:"Science",chapter:"সমীকরণ"},
+ {question:"Which is the past form of 'go'?",options:["Goed","Gone","Went","Going"],answer:2,explanation:"Go-এর simple past form হলো went।",subject:"English",level:"SSC",group:"Science",chapter:"Tense"}
 ];
-
 const sq=[
  {q:"কোষ কী?",a:"কোষ হলো জীবদেহের গঠন ও কাজের মৌলিক একক।"},
  {q:"রাইবোজোমের কাজ কী?",a:"রাইবোজোমে প্রোটিন সংশ্লেষণ হয়।"},
  {q:"কোষঝিল্লির একটি কাজ লেখো।",a:"কোষে পদার্থের প্রবেশ ও বের হওয়া নিয়ন্ত্রণ করা।"},
  {q:"মাইটোকন্ড্রিয়াকে শক্তিঘর বলা হয় কেন?",a:"কোষীয় শ্বসনে ATP উৎপাদনে গুরুত্বপূর্ণ ভূমিকা রাখে বলে।"},
- {q:"কোষপ্রাচীরের প্রধান উপাদান কী?",a:"উদ্ভিদকোষের কোষপ্রাচীরের প্রধান উপাদান সেলুলোজ।"}
+ {q:"কোষপ্রাচীরের প্রধান উপাদান কী?",a:"উদ্ভিদকোষের কোষপ্রাচীরের প্রধান উপাদান সেলুলোজ।"},
+ {q:"সমীকরণ 2x + 4 = 10 সমাধান করো।",a:"2x + 4 = 10; 2x = 6; সুতরাং x = 3।"}
 ];
-
 const cq=[
  {q:"একটি উদ্ভিদকোষে বাইরের দৃঢ় আবরণ ও ভেতরে পদার্থ চলাচল নিয়ন্ত্রণকারী পাতলা আবরণ রয়েছে।",a:"(ক) কোষ কী? (খ) কোষঝিল্লিকে নির্বাচনী ভেদ্য বলা হয় কেন? (গ) কোষপ্রাচীরের দুটি কাজ লেখো। (ঘ) কোষপ্রাচীর ও কোষঝিল্লির ভূমিকার তুলনা করো।",hint:"কোষের সংজ্ঞা, নির্বাচনী ভেদ্যতা, দৃঢ়তা, সুরক্ষা ও পদার্থ পরিবহনের ভূমিকা ব্যাখ্যা করো।"},
- {q:"একটি অঙ্গাণু প্রোটিন তৈরি করে এবং আরেকটি অঙ্গাণু প্রোটিন প্যাকেজিং ও পরিবহনে সাহায্য করে।",a:"(ক) অঙ্গাণু কী? (খ) রাইবোজোমের কাজ লেখো। (গ) গলজি বস্তুর ভূমিকা ব্যাখ্যা করো। (ঘ) প্রোটিন তৈরি ও পরিবহনে এদের ভূমিকা বিশ্লেষণ করো।",hint:"রাইবোজোমের প্রোটিন সংশ্লেষণ এবং গলজি বস্তুর পরিবর্তন, প্যাকেজিং ও পরিবহন আলোচনা করো।"}
+ {q:"একটি অঙ্গাণু প্রোটিন তৈরি করে এবং আরেকটি অঙ্গাণু প্রোটিন প্যাকেজিং ও পরিবহনে সাহায্য করে।",a:"(ক) অঙ্গাণু কী? (খ) রাইবোজোমের কাজ লেখো। (গ) গলজি বস্তুর ভূমিকা ব্যাখ্যা করো। (ঘ) প্রোটিন তৈরি ও পরিবহনে এদের ভূমিকা বিশ্লেষণ করো।",hint:"রাইবোজোমের প্রোটিন সংশ্লেষণ এবং গলজি বস্তুর পরিবর্তন, প্যাকেজিং ও পরিবহন আলোচনা করো।"},
+ {q:"একজন শিক্ষার্থী একটি সরল সমীকরণ সমাধান করছে: 2x + 4 = 10।",a:"(ক) চলক কী? (খ) সমীকরণ কী? (গ) x-এর মান নির্ণয় করো। (ঘ) সমাধানের ধাপ ব্যাখ্যা করো।",hint:"সমীকরণের উভয় পাশে একই গাণিতিক ক্রিয়া প্রয়োগ করে ধাপে ধাপে সমাধান করো।"}
 ];
-
-const notesList=document.getElementById("notesList");
-function showNotes(list){
- notesList.innerHTML="";
- if(!list.length){notesList.textContent="কোনো নোট পাওয়া যায়নি।";return;}
- list.forEach(n=>{
+const $=id=>document.getElementById(id);
+function safeGet(key,fallback){try{const v=localStorage.getItem(key);return v===null?fallback:JSON.parse(v)}catch(e){return fallback}}
+function safeSet(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch(e){return false}}
+let profile=safeGet("learnovaProfile",{level:"HSC",group:"Science",language:"bn"});
+$("level").value=profile.level;$("group").value=profile.group;$("language").value=profile.language;
+function selectedSubjects(){return (subjectMap[$("level").value]||subjectMap.HSC)[$("group").value]||subjectMap.HSC.Science}
+function updateProfile(){
+ profile={level:$("level").value,group:$("group").value,language:$("language").value};
+ safeSet("learnovaProfile",profile);
+ renderSubjects();renderFinderSubjects();renderNotes($("noteSearch").value);
+}
+function renderSubjects(){
+ const list=selectedSubjects();$("subjectCards").innerHTML="";
+ list.forEach(subject=>{
+  const card=document.createElement("div");card.className="card";
+  const title=document.createElement("h3");title.textContent="📘 "+subject;
+  const desc=document.createElement("p");desc.className="muted";desc.textContent="নোট ও অনুশীলনী প্রশ্ন";
+  const btn=document.createElement("button");btn.className="btn";btn.textContent="শুরু করো";
+  btn.onclick=()=>{$("finderSubject").value=subject;$("chapter").value="";$("type").value="MCQ";$("finder").scrollIntoView({behavior:"smooth"});};
+  card.append(title,desc,btn);$("subjectCards").appendChild(card);
+ });
+}
+function renderFinderSubjects(){
+ const old=$("finderSubject").value;const subjects=selectedSubjects();$("finderSubject").innerHTML="";
+ subjects.forEach(s=>{const o=document.createElement("option");o.value=s;o.textContent=s;$("finderSubject").appendChild(o)});
+ if(subjects.includes(old))$("finderSubject").value=old;
+}
+function renderNotes(query=""){
+ const q=query.trim().toLowerCase();const filtered=notes.filter(n=>(n.title+" "+n.subject+" "+n.level+" "+n.group).toLowerCase().includes(q));
+ $("notesList").innerHTML="";
+ if(!filtered.length){$("notesList").textContent="কোনো নোট পাওয়া যায়নি।";return}
+ filtered.forEach(n=>{
   const card=document.createElement("div");card.className="card";
   const h=document.createElement("h3");h.textContent=n.title;
-  const p=document.createElement("p");p.textContent=n.subject+" • "+n.type;
-  const b=document.createElement("button");b.className="btn";b.textContent=n.type==="ফ্রি নোট"?"নোট পড়ো":"অবস্থা দেখো";
-  b.onclick=()=>alert(n.title+"\n\n"+n.content);
-  card.append(h,p,b);notesList.appendChild(card);
+  const p=document.createElement("p");p.className="muted";p.textContent=n.subject+" • "+n.level+" • "+n.type;
+  const b=document.createElement("button");b.className="btn";b.textContent="নোট পড়ো";b.onclick=()=>{const r=$("noteReader");r.hidden=false;r.innerHTML="";const hh=document.createElement("h3");hh.textContent=n.title;const pp=document.createElement("p");pp.textContent=n.content;r.append(hh,pp);r.scrollIntoView({behavior:"smooth",block:"nearest"})};
+  card.append(h,p,b);$("notesList").appendChild(card);
  });
 }
-showNotes(notes);
-document.getElementById("noteSearch").addEventListener("input",e=>{
- const s=e.target.value.toLowerCase();
- showNotes(notes.filter(n=>(n.title+" "+n.subject).toLowerCase().includes(s)));
-});
+$("level").addEventListener("change",updateProfile);$("group").addEventListener("change",updateProfile);$("language").addEventListener("change",updateProfile);
+$("noteSearch").addEventListener("input",e=>renderNotes(e.target.value));
+renderSubjects();renderFinderSubjects();renderNotes();
 
-let activeQuestions=questions;
-let current=0;
-let chosen={};
-let checked=false;
-const quizArea=document.getElementById("quizArea");
-const score=document.getElementById("score");
-
+let activeQuestions=questions.filter(q=>q.subject==="জীববিজ্ঞান");
+let current=0,chosen={},checked=false;
+const quizArea=$("quizArea");
 function startQuiz(list,title){
  activeQuestions=list;current=0;chosen={};checked=false;
- document.getElementById("quizTitle").textContent=title||"কুইজ";
+ $("quizTitle").textContent=title||"অনুশীলনী MCQ";
  renderQuestion();
- document.getElementById("quiz").scrollIntoView({behavior:"smooth"});
 }
 function renderQuestion(){
- quizArea.innerHTML="";score.textContent="";
- if(!activeQuestions.length){
-  quizArea.textContent="এই ধরনের প্রশ্ন এখনো যোগ করা হয়নি।";
-  document.getElementById("checkBtn").disabled=true;
-  document.getElementById("prevBtn").disabled=true;
-  document.getElementById("nextBtn").disabled=true;
-  return;
- }
- document.getElementById("checkBtn").disabled=checked;
- document.getElementById("prevBtn").disabled=current===0;
- document.getElementById("nextBtn").disabled=current===activeQuestions.length-1;
- const q=activeQuestions[current];
+ quizArea.innerHTML="";$("score").textContent="";
+ if(!activeQuestions.length){quizArea.textContent="এই ধরনের প্রশ্ন এখনো যোগ করা হয়নি।";$("checkBtn").disabled=true;$("prevBtn").disabled=true;$("nextBtn").disabled=true;$("quizProgress").style.width="0%";return}
+ const q=activeQuestions[current];$("quizProgress").style.width=((current+1)/activeQuestions.length*100)+"%";
+ $("checkBtn").disabled=checked;$("prevBtn").disabled=current===0;$("nextBtn").disabled=current===activeQuestions.length-1;
  const box=document.createElement("div");box.className="question";
- const progress=document.createElement("p");progress.className="muted";progress.textContent="প্রশ্ন "+(current+1)+" / "+activeQuestions.length;
- const h=document.createElement("h3");h.textContent=q.question;
- box.append(progress,h);
- q.options.forEach((op,i)=>{
-  const label=document.createElement("label");label.className="option";
-  const r=document.createElement("input");r.type="radio";r.name="answer";r.value=i;r.checked=chosen[current]===i;r.disabled=checked;
-  r.onchange=()=>{chosen[current]=i;};
-  label.append(r,document.createTextNode(op));
-  if(checked&&i===q.answer)label.classList.add("correct");
-  if(checked&&chosen[current]===i&&i!==q.answer)label.classList.add("wrong");
-  box.appendChild(label);
- });
- if(checked){
-  const fb=document.createElement("div");fb.className="feedback "+(chosen[current]===q.answer?"correct":"wrong");
-  fb.textContent=(chosen[current]===q.answer?"✓ সঠিক উত্তর! ":"✗ ভুল বা উত্তর দেওয়া হয়নি। সঠিক উত্তর: "+q.options[q.answer]+". ")+q.explanation;
-  box.appendChild(fb);
- }
- quizArea.appendChild(box);
- if(checked){
-  const total=activeQuestions.reduce((sum,q,i)=>sum+(chosen[i]===q.answer?1:0),0);
-  score.textContent="তোমার নম্বর: "+total+" / "+activeQuestions.length;
- }
-}
-document.getElementById("checkBtn").onclick=()=>{if(!checked){checked=true;renderQuestion();}};
-document.getElementById("prevBtn").onclick=()=>{if(current>0){current--;renderQuestion();}};
-document.getElementById("nextBtn").onclick=()=>{if(current<activeQuestions.length-1){current++;renderQuestion();}};
-document.getElementById("resetBtn").onclick=()=>startQuiz(activeQuestions,"আবার চেষ্টা করো");
-startQuiz(questions,"কোষ ও এর গঠন — অনুশীলনী MCQ");
-
-function showCards(items,title){
- const area=document.getElementById("searchResults");area.innerHTML="";
- const heading=document.createElement("h3");heading.textContent=title;area.appendChild(heading);
- if(!items.length){area.append("এই বিভাগে প্রশ্ন যোগ করা হয়নি।");return;}
- items.forEach((item,i)=>{
-  const card=document.createElement("div");card.className="result";
-  const h=document.createElement("h3");h.textContent=(i+1)+". "+item.q;card.appendChild(h);
-  const a=document.createElement("p");a.textContent="উত্তর: "+item.a;card.appendChild(a);
-  if(item.hint){const p=document.createElement("p");p.textContent="লেখার নির্দেশনা: "+item.hint;card.appendChild(p);}
-  area.appendChild(card);
- });
-}
-document.getElementById("findBtn").onclick=()=>{
- const subject=document.getElementById("subject").value;
- const chapter=document.getElementById("chapter").value.trim().toLowerCase();
- const type=document.getElementById("type").value;
- const year=document.getElementById("year").value;
- const area=document.getElementById("searchResults");area.innerHTML="";
- if(year){
-  area.textContent="এই সালের যাচাইকৃত বোর্ড প্রশ্ন এখনো SOLVIO-তে যোগ করা হয়নি। সাল ফাঁকা রেখে অনুশীলনী প্রশ্ন দেখো।";
-  return;
- }
- if(subject!=="জীববিজ্ঞান"){
-  area.textContent="এই বিষয়ের প্রশ্নব্যাংক এখনো যোগ করা হয়নি। আপাতত জীববিজ্ঞান বেছে নাও।";
-  return;
- }
- if(chapter&&!["কোষ ও এর গঠন","কোষ","chapter 1","১","1"].includes(chapter)){
-  area.textContent="এই অধ্যায়ের প্রশ্ন এখনো যোগ করা হয়নি। 'কোষ ও এর গঠন' লিখে দেখো।";
-  return;
- }
- if(type==="MCQ"){
-  startQuiz(questions,"কোষ ও এর গঠন — অনুশীলনী MCQ");
- }else if(type==="SQ"){
-  showCards(sq,"সংক্ষিপ্ত প্রশ্ন (SQ)");
- }else{
-  showCards(cq,"সৃজনশীল প্রশ্ন (CQ)");
- }
-};
-
-document.getElementById("saveSuggestion").onclick=()=>{
- const suggestion=document.getElementById("studentSuggestion").value.trim();
- const name=document.getElementById("studentName").value.trim()||"নাম দেওয়া হয়নি";
- const msg=document.getElementById("suggestionMessage");
- if(!suggestion){msg.textContent="আগে তোমার পরামর্শ লেখো।";return;}
- try{
-  const saved=JSON.parse(localStorage.getItem("solvioSuggestions")||"[]");
-  saved.push({name:name,suggestion:suggestion});
-  localStorage.setItem("solvioSuggestions",JSON.stringify(saved));
-  msg.textContent="এই ডিভাইসে পরামর্শ সংরক্ষিত হয়েছে; মালিকের কাছে পাঠানো হয়নি।";
-  document.getElementById("studentSuggestion").value="";
- }catch(e){msg.textContent="সংরক্ষণ করা যায়নি।";}
-};
-</script>
-</body>
-</html>
+ const progress=do
